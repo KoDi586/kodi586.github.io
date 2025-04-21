@@ -1,12 +1,126 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Сайт разработчика</title>
     <meta name="yandex-verification" content="06f51dda2005df74" />
     <meta name="google-site-verification" content="o65kw7goWh9U-z9XdMhW1Y9KIZm2luZfAHMSgmM2_mY" />
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f5f5f5;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            flex: 1;
+        }
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+            font-size: 2.5rem;
+        }
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+        .message {
+            background-color: #f8f9fa;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin-bottom: 30px;
+            border-radius: 0 4px 4px 0;
+        }
+        .links-section {
+            margin-top: 40px;
+        }
+        .links-section h2 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+        .links-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .link-placeholder {
+            background-color: #f1f1f1;
+            padding: 15px;
+            border-radius: 4px;
+            text-align: center;
+            color: #95a5a6;
+            font-style: italic;
+        }
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 20px 15px;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            .links-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-
+    <div class="container">
+        <header>
+            <h1>Сайт разработчика</h1>
+            <p class="subtitle">Персональная страница</p>
+        </header>
+        
+        <div class="message">
+            <p>Похоже, вы попали на личную страницу разработчика. Возможно, вы ошиблись при вводе адреса или перешли по устаревшей ссылке.</p>
+        </div>
+        
+        <div class="links-section">
+            <h2>Возможно, вы искали один из этих сайтов:</h2>
+            <div class="links-container">
+                <div class="link-placeholder">Здесь скоро появятся ссылки</div>
+                <div class="link-placeholder">Здесь скоро появятся ссылки</div>
+                <div class="link-placeholder">Здесь скоро появятся ссылки</div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>&copy; 2023 Сайт разработчика. Все права защищены.</p>
+        </footer>
+    </div>
 </body>
 </html>
