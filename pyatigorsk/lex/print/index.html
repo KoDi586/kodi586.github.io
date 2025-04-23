@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Lex-print - Типографические услуги и сервисный центр</title>
+    <meta name="description" content="Профессиональные типографические услуги: печати, визитки, брендирование, печать на одежде и кружках, вывески и многое другое.">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link rel="icon" href="./image_2025-04-21_21-05-06.png" />
+</head>
+<body>
+    <!-- Навигация -->
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">Lex-print</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Главная</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Услуги</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Портфолио</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">О нас</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <script>
+        // Встроенные данные из JSON-файла для избежания ошибок CORS при локальном просмотре
+        const portfolioData = {
+          "portfolio": [
+            {
+              "url": "https://static.tildacdn.info/tild3934-3937-4438-a331-393366666465/WhatsApp_Image_2023-.jpeg",
+              "title": "Корпоративные печати",
+              "description": "Серия печатей для сети магазинов"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild6437-6331-4266-b366-306331333062/_2023-12-22_10232190.png",
+              "title": "Брендирование продукции",
+              "description": "Комплексное оформление товаров для компании"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild3331-3966-4630-a565-363239646330/_2023-12-22_10373658.png",
+              "title": "Сувенирные кружки",
+              "description": "Партия кружек с логотипом для корпоративного мероприятия"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild3338-6437-4865-b262-333637663232/7edb900a-aef4-44b5-b.jpg",
+              "title": "Печать на одежде",
+              "description": "Коллекция брендированной одежды для спортивной команды"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild3463-3935-4165-a462-663236393733/_2023-12-22_10542701.png",
+              "title": "Дизайн визиток",
+              "description": "Разработка фирменного стиля для юридической компании"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild6633-3565-4635-b034-346634383963/_2023-12-22_11095729.png",
+              "title": "Наружная реклама",
+              "description": "Вывески и баннеры для торгового центра"
+            }, 
+            
+          ]
+        };
+        
+        const servicesData = {
+          "services": [
+            {
+              "url": "https://static.tildacdn.info/tild3934-3937-4438-a331-393366666465/WhatsApp_Image_2023-.jpeg",
+              "title": "Создание печатей",
+              "description": "Изготовление качественных печатей и штампов для вашей организации с учетом всех требований.",
+              "price": "от 800 ₽"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild6437-6331-4266-b366-306331333062/_2023-12-22_10232190.png",
+              "title": "Брендирование товаров",
+              "description": "Нанесение вашего логотипа и фирменного стиля на различные товары и сувенирную продукцию.",
+              "price": "от 1200 ₽"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild3331-3966-4630-a565-363239646330/_2023-12-22_10373658.png",
+              "title": "Печать на кружках",
+              "description": "Качественная печать изображений и надписей на кружках — отличный подарок или сувенир.",
+              "price": "от 450 ₽"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild3338-6437-4865-b262-333637663232/7edb900a-aef4-44b5-b.jpg",
+              "title": "Печать на одежде",
+              "description": "Нанесение изображений на футболки, толстовки и другую одежду с использованием современных технологий.",
+              "price": "от 900 ₽"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild3463-3935-4165-a462-663236393733/_2023-12-22_10542701.png",
+              "title": "Создание визиток",
+              "description": "Разработка и печать стильных визиток, которые помогут выделить ваш бизнес среди конкурентов.",
+              "price": "от 500 ₽"
+            },
+            {
+              "url": "https://static.tildacdn.info/tild6633-3565-4635-b034-346634383963/_2023-12-22_11095729.png",
+              "title": "Создание вывесок",
+              "description": "Изготовление ярких и заметных вывесок для вашего бизнеса с использованием долговечных материалов.",
+              "price": "от 3000 ₽"
+            }
+          ]
+        };
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            // Получаем контейнер для карусели услуг
+            const carouselInner = document.querySelector('#servicesCarousel .carousel-inner');
+            
+            // Очищаем существующее содержимое
+            carouselInner.innerHTML = '';
+            
+            // Создаем слайды по 3 услуги в каждом
+            const services = servicesData.services;
+            const slidesCount = Math.ceil(services.length / 3);
+            
+            for (let i = 0; i < slidesCount; i++) {
+                const slideDiv = document.createElement('div');
+                slideDiv.className = i === 0 ? 'carousel-item active' : 'carousel-item';
+                
+                const rowDiv = document.createElement('div');
+                rowDiv.className = 'row';
+                
+                // Добавляем до 3 услуг в слайд
+                for (let j = i * 3; j < Math.min((i + 1) * 3, services.length); j++) {
+                    const service = services[j];
+                    const serviceCol = document.createElement('div');
+                    serviceCol.className = 'col-md-4 mb-4';
+                    serviceCol.innerHTML = `
+                        <div class="service-card">
+                            <div class="service-img">
+                                <img src="${service.url}" alt="${service.title}" class="img-fluid">
+                            </div>
+                            <div class="service-content">
+                                <h3>${service.title}</h3>
+                                <p>${service.description}</p>
+                                <div class="price-tag">${service.price}</div>
+                                <a href="#contact" class="btn btn-outline-dark btn-sm rounded-pill">Подробнее</a>
+                            </div>
+                        </div>
+                    `;
+                    rowDiv.appendChild(serviceCol);
+                }
+                
+                slideDiv.appendChild(rowDiv);
+                carouselInner.appendChild(slideDiv);
+            }
+            
+            // Обновляем индикаторы карусели
+            const indicators = document.querySelector('#servicesCarousel .carousel-indicators');
+            indicators.innerHTML = '';
+            
+            for (let i = 0; i < slidesCount; i++) {
+                const button = document.createElement('button');
+                button.setAttribute('type', 'button');
+                button.setAttribute('data-bs-target', '#servicesCarousel');
+                button.setAttribute('data-bs-slide-to', i.toString());
+                if (i === 0) {
+                    button.classList.add('active');
+                    button.setAttribute('aria-current', 'true');
+                }
+                button.setAttribute('aria-label', `Slide ${i+1}`);
+                indicators.appendChild(button);
+            }
+            
+            // Заполняем раздел портфолио данными из JSON
+            const portfolioContainer = document.querySelector('#portfolio .row.g-4');
+            if (portfolioContainer) {
+                portfolioContainer.innerHTML = '';
+                
+                // Добавляем элементы портфолио из JSON-данных
+                portfolioData.portfolio.forEach(item => {
+                    const portfolioCol = document.createElement('div');
+                    portfolioCol.className = 'col-md-4';
+                    portfolioCol.innerHTML = `
+                        <div class="portfolio-item">
+                            <img src="${item.url}" alt="${item.title}" class="img-fluid">
+                            <div class="portfolio-overlay">
+                                <div class="portfolio-content">
+                                    <h4>${item.title}</h4>
+                                    <p>${item.description}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    portfolioContainer.appendChild(portfolioCol);
+                });
+            }
+        });
+    </script>
+
+    <!-- Главный экран -->
+    <header id="home" class="hero">
+        <div class="overlay"></div>
+        <div class="container h-100">
+            <div class="row h-100 align-items-center">
+                <div class="col-12 text-center">
+                    <h1 class="display-1 fw-bold" style="font-size: 10rem;">Lex-print</h1>
+                    <p class="lead" style="font-size: 5.2rem; font-weight: 400;">the realisation of your imagination</p>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-down">
+            <a href="#services"><i class="fas fa-chevron-down"></i></a>
+        </div>
+    </header>
+
+    <!-- Услуги -->
+    <section id="services" class="py-5">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="section-title">Наши услуги</h2>
+                    <p class="section-subtitle">Профессиональные решения для вашего бизнеса</p>
+                </div>
+            </div>
+            <div id="servicesCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#servicesCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#servicesCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#servicesCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card">
+                                    <div class="service-img">
+                                        <img src="https://static.tildacdn.info/tild3934-3937-4438-a331-393366666465/WhatsApp_Image_2023-.jpeg" alt="Создание печатей" class="img-fluid">
+                                    </div>
+                                    <div class="service-content">
+                                        <h3>Создание печатей</h3>
+                                        <p>Изготовление качественных печатей и штампов для вашей организации с учетом всех требований.</p>
+                                        <div class="price-tag">от 800 ₽</div>
+                                        <a href="#" class="btn btn-outline-dark btn-sm rounded-pill">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card">
+                                    <div class="service-img">
+                                        <img src="https://static.tildacdn.info/tild6437-6331-4266-b366-306331333062/_2023-12-22_10232190.png" alt="Брендирование товаров" class="img-fluid">
+                                    </div>
+                                    <div class="service-content">
+                                        <h3>Брендирование товаров</h3>
+                                        <p>Нанесение вашего логотипа и фирменного стиля на различные товары и сувенирную продукцию.</p>
+                                        <div class="price-tag">от 1200 ₽</div>
+                                        <a href="#" class="btn btn-outline-dark btn-sm rounded-pill">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card">
+                                    <div class="service-img">
+                                        <img src="https://static.tildacdn.info/tild3331-3966-4630-a565-363239646330/_2023-12-22_10373658.png" alt="Печать на кружках" class="img-fluid">
+                                    </div>
+                                    <div class="service-content">
+                                        <h3>Печать на кружках</h3>
+                                        <p>Качественная печать изображений и надписей на кружках — отличный подарок или сувенир.</p>
+                                        <div class="price-tag">от 450 ₽</div>
+                                        <a href="#" class="btn btn-outline-dark btn-sm rounded-pill">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card">
+                                    <div class="service-img">
+                                        <img src="https://static.tildacdn.info/tild3338-6437-4865-b262-333637663232/7edb900a-aef4-44b5-b.jpg" alt="Печать на одежде" class="img-fluid">
+                                    </div>
+                                    <div class="service-content">
+                                        <h3>Печать на одежде</h3>
+                                        <p>Нанесение изображений на футболки, толстовки и другую одежду с использованием современных технологий.</p>
+                                        <div class="price-tag">от 900 ₽</div>
+                                        <a href="#" class="btn btn-outline-dark btn-sm rounded-pill">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card">
+                                    <div class="service-img">
+                                        <img src="https://static.tildacdn.info/tild3463-3935-4165-a462-663236393733/_2023-12-22_10542701.png" alt="Создание визиток" class="img-fluid">
+                                    </div>
+                                    <div class="service-content">
+                                        <h3>Создание визиток</h3>
+                                        <p>Разработка и печать стильных визиток, которые помогут выделить ваш бизнес среди конкурентов.</p>
+                                        <div class="price-tag">от 500 ₽</div>
+                                        <a href="#" class="btn btn-outline-dark btn-sm rounded-pill">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4">
+                                <div class="service-card">
+                                    <div class="service-img">
+                                        <img src="https://static.tildacdn.info/tild6633-3565-4635-b034-346634383963/_2023-12-22_11095729.png" alt="Создание вывесок" class="img-fluid">
+                                    </div>
+                                    <div class="service-content">
+                                        <h3>Создание вывесок</h3>
+                                        <p>Изготовление ярких и заметных вывесок для вашего бизнеса с использованием долговечных материалов.</p>
+                                        <div class="price-tag">от 3000 ₽</div>
+                                        <a href="#" class="btn btn-outline-dark btn-sm rounded-pill">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#servicesCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Предыдущий</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#servicesCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Следующий</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио -->
+    <section id="portfolio" class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="section-title">Наши работы</h2>
+                    <p class="section-subtitle">Примеры успешно реализованных проектов</p>
+                </div>
+            </div>
+            <div class="row g-4">
+                <!-- Элементы портфолио будут добавлены динамически из JSON-данных -->
+            </div>
+            <div class="text-center mt-4">
+                <a href="" class="btn btn-outline-dark btn-lg rounded-pill px-4 py-2" style="font-size: 1.2rem; font-weight: 500;">Портфолио</a>
+            </div>
+            
+            </div>
+        </div>
+    </section>
+
+    <!-- О нас -->
+    <section id="about" class="py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 mb-4 mb-lg-0">
+                    <div class="about-img">
+                        <img src="https://static.tildacdn.info/tild6461-3336-4437-b930-393530636633/d82af29ad960ebb0f79c.jpeg" alt="О компании Lex-print" class="img-fluid rounded">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="about-content">
+                        <h2 class="section-title">О компании Lex-print</h2>
+                        <p class="mb-4">Мы — команда профессионалов с многолетним опытом работы в сфере типографии и печати. Наша миссия — помогать бизнесу и частным клиентам воплощать их идеи в качественные печатные материалы.</p>
+                        <p class="mb-4">Компания Lex-print предлагает широкий спектр услуг: от изготовления печатей и штампов до брендирования товаров и создания рекламных материалов. Мы используем современное оборудование и качественные материалы, чтобы результат превосходил ваши ожидания.</p>
+                        <div class="row g-4 mt-3">
+                            <div class="col-6">
+                                <div class="about-feature">
+                                    <i class="fas fa-check-circle"></i>
+                                    <h5>Качество</h5>
+                                    <p>Используем только лучшие материалы и современное оборудование</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="about-feature">
+                                    <i class="fas fa-clock"></i>
+                                    <h5>Скорость</h5>
+                                    <p>Выполняем заказы в кратчайшие сроки без потери качества</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="about-feature">
+                                    <i class="fas fa-user-tie"></i>
+                                    <h5>Профессионализм</h5>
+                                    <p>Команда опытных специалистов с многолетним стажем</p>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="about-feature">
+                                    <i class="fas fa-handshake"></i>
+                                    <h5>Индивидуальный подход</h5>
+                                    <p>Учитываем все пожелания и особенности каждого клиента</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="py-5 bg-light">
+        <div class="container">
+            <div class="row text-center mb-5">
+                <div class="col-12">
+                    <h2 class="section-title">Свяжитесь с нами</h2>
+                    <p class="section-subtitle">Мы всегда рады ответить на ваши вопросы</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-5 mb-4 mb-lg-0">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <h5>Адрес</h5>
+                                <p>ул. 295-й Стрелковой Дивизии, 15, Пятигорск</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone-alt"></i>
+                            <div>
+                                <h5>Телефон</h5>
+                                <a href="tel:79624054117">+7 (962) 405-41-17</a>
+                                <span class="mx-1">|</span>
+                                <a href="tel:79386512128">+7 (938) 651-21-28</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <h5>Email</h5>
+                                <a href="mailto:lex-pr1nt@yandex.ru">lex-pr1nt@yandex.ru</a>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h5>Режим работы</h5>
+                                <p>Каждый день <br/> с 8:00 до 20:00</br>
+                            </div>
+                        </div>
+                        <div class="social-links mt-4">
+                            <a href="https://kwork.ru/user/nero_fullstack" class="social-link"><i class="fab fa-vk"></i></a>
+                            <a href="https://kwork.ru/user/nero_fullstack" class="social-link"><i class="fab fa-telegram"></i></a>
+                            <a href="https://wa.me/79887355969" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                            <a href="https://kwork.ru/user/nero_fullstack" class="social-link"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-7">
+                    <div class="contact-form">
+                        <form action="mailto:asdfqw321244@gmail.com" method="post" enctype="text/plain">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <input type="text" name="name" class="form-control" placeholder="Ваше имя" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                                </div>
+                                <div class="col-12">
+                                    <input type="text" name="subject" class="form-control" placeholder="Тема">
+                                </div>
+                                <div class="col-12">
+                                    <textarea name="message" class="form-control" rows="5" placeholder="Сообщение" required></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-primary">Отправить сообщение</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer py-4">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-lg-start mb-3 mb-lg-0">
+                    <div class="footer-logo">Lex-print</div>
+                    <p class="small mb-0">© 2025 Lex-print. Все права защищены. </p>
+                </div>
+                <div class="col-lg-4 text-center mb-3 mb-lg-0">
+                    <a href="#" class="footer-link">Политика конфиденциальности</a>
+                    <span class="mx-1">|</span>
+                    <a href="#" class="footer-link">Условия использования</a>
+                    <span class="mx-1">|</span>
+                    <a href="https://kwork.ru/user/nero_fullstack" class="footer-link">Сайт сделан</a>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <div class="social-links">
+                        <a href="https://kwork.ru/user/nero_fullstack" class="social-link"><i class="fab fa-vk"></i></a>
+                        <a href="https://kwork.ru/user/nero_fullstack" class="social-link"><i class="fab fa-telegram"></i></a>
+                        <a href="https://wa.me/79887355969" class="social-link"><i class="fab fa-whatsapp"></i></a>
+                        <a href="https://kwork.ru/user/nero_fullstack" class="social-link"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Кнопка прокрутки вверх -->
+    <a href="#home" class="scroll-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
