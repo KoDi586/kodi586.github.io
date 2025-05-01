@@ -96,6 +96,32 @@
             transform: translateY(-2px);
         }
     </style>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('YOUR_GOOGLE_SCRIPT_URL', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    alert('Спасибо за ваши ответы!');
+                    form.reset();
+                } else {
+                    throw new Error('Network response was not ok');
+                }
+            } catch (error) {
+                alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.');
+                console.error('Error:', error);
+            }
+        });
+    });
+</script>
 </head>
 <body>
     <div class="survey-container">
