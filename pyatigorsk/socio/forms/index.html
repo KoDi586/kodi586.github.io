@@ -96,6 +96,67 @@
             transform: translateY(-2px);
         }
     </style>
+</head>
+<body>
+<div class="survey-container">
+    <h2>Опрос: Влияние видеоигр на студентов</h2>
+    <p>Многие студенты регулярно играют в видеоигры, и это влияет на их учёбу и повседневную жизнь.</p>
+    <p><small><span style="color: var(--accent-color);">* </span>- обязательные поля для заполнения</small></p>
+
+    <form action="#" method="post">
+        <div class="question-group">
+            <h3>1. Играете ли вы в видеоигры во время учёбы в университете? <span
+                    style="color: var(--accent-color);">*</span></h3>
+            <label><input type="radio" name="gaming_frequency" value="daily" required> Да, почти каждый день</label>
+            <label><input type="radio" name="gaming_frequency" value="several_times" required> Да, несколько раз в
+                неделю</label>
+            <label><input type="radio" name="gaming_frequency" value="rarely" required> Редко</label>
+            <label><input type="radio" name="gaming_frequency" value="never" required> Вообще не играю</label>
+        </div>
+
+        <div class="question-group">
+            <h3>2. Сколько времени в среднем вы проводите за играми в будни? <span
+                    style="color: var(--accent-color);">*</span></h3>
+            <label><input type="radio" name="time_spent" value="less_than_1" required> Менее часа</label>
+            <label><input type="radio" name="time_spent" value="1_2" required> 1–2 часа</label>
+            <label><input type="radio" name="time_spent" value="3_4" required> 3–4 часа</label>
+            <label><input type="radio" name="time_spent" value="more_than_4" required> Более 4 часов</label>
+            <label><input type="radio" name="time_spent" value="none" required> Не играю в будни</label>
+        </div>
+
+        <div class="question-group">
+            <h3>3. Как, по вашему мнению, игры влияют на вашу учёбу? <span style="color: var(--accent-color);">*</span>
+            </h3>
+            <label><input type="radio" name="impact" value="positive" required> Помогают расслабиться и
+                восстановиться</label>
+            <label><input type="radio" name="impact" value="negative" required> Отвлекают и мешают учёбе</label>
+            <label><input type="radio" name="impact" value="neutral" required> Не влияют вообще</label>
+            <label><input type="radio" name="impact" value="unsure" required> Затрудняюсь ответить</label>
+        </div>
+
+        <div class="question-group">
+            <h3>4. Играете ли вы в игры с одногруппниками/друзьями из университета? <span
+                    style="color: var(--accent-color);">*</span></h3>
+            <label><input type="radio" name="with_friends" value="often" required> Да, часто</label>
+            <label><input type="radio" name="with_friends" value="sometimes" required> Иногда</label>
+            <label><input type="radio" name="with_friends" value="rarely" required> Редко</label>
+            <label><input type="radio" name="with_friends" value="never" required> Никогда</label>
+        </div>
+
+        <div class="question-group">
+            <h3>5. Заметили ли вы какие-либо положительные эффекты от игр (например, развитие логики, реакции, общения)?
+                <span style="color: var(--accent-color);">*</span></h3>
+            <label><input type="radio" name="positive_effects" value="many" required> Да, много положительного</label>
+            <label><input type="radio" name="positive_effects" value="some" required> Скорее да</label>
+            <label><input type="radio" name="positive_effects" value="few" required> Скорее нет</label>
+            <label><input type="radio" name="positive_effects" value="none" required> Нет, только негатив</label>
+        </div>
+
+        <input type="submit" value="Отправить">
+    </form>
+</div>
+</body>
+</html>
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const form = document.querySelector('form');
@@ -104,17 +165,23 @@
             
             try {
                 const formData = new FormData(form);
-                const response = await fetch('https://script.google.com/macros/s/AKfycbyrXFsiAP4Olps8WFz4dkmRBi_GABvBvuFczHxCDJ3NtiAshCNirgpOiVnqz07AxSBR/exec', {
-                    method: 'POST',
-                    body: formData
+                const data = {};
+                formData.forEach((value, key) => {
+                    data[key] = value;
                 });
                 
-                if (response.ok) {
-                    alert('Спасибо за ваши ответы!');
-                    form.reset();
-                } else {
-                    throw new Error('Network response was not ok');
-                }
+                const response = await fetch('https://script.google.com/macros/s/AKfycbyrXFsiAP4Olps8WFz4dkmRBi_GABvBvuFczHxCDJ3NtiAshCNirgpOiVnqz07AxSBR/exec', {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+                
+                alert('Спасибо за ваши ответы!');
+                form.reset();
+                
             } catch (error) {
                 alert('Произошла ошибка при отправке формы. Пожалуйста, попробуйте еще раз.');
                 console.error('Error:', error);
@@ -122,57 +189,3 @@
         });
     });
 </script>
-</head>
-<body>
-    <div class="survey-container">
-        <h2>Опрос: Влияние видеоигр на студентов</h2>
-        <p>Многие студенты регулярно играют в видеоигры, и это влияет на их учёбу и повседневную жизнь.</p>
-        <p><small><span style="color: var(--accent-color);">* </span>- обязательные поля для заполнения</small></p>
-
-        <form action="#" method="post">
-            <div class="question-group">
-                <h3>1. Играете ли вы в видеоигры во время учёбы в университете? <span style="color: var(--accent-color);">*</span></h3>
-                <label><input type="radio" name="gaming_frequency" value="daily" required> Да, почти каждый день</label>
-                <label><input type="radio" name="gaming_frequency" value="several_times" required> Да, несколько раз в неделю</label>
-                <label><input type="radio" name="gaming_frequency" value="rarely" required> Редко</label>
-                <label><input type="radio" name="gaming_frequency" value="never" required> Вообще не играю</label>
-            </div>
-
-            <div class="question-group">
-                <h3>2. Сколько времени в среднем вы проводите за играми в будни? <span style="color: var(--accent-color);">*</span></h3>
-                <label><input type="radio" name="time_spent" value="less_than_1" required> Менее часа</label>
-                <label><input type="radio" name="time_spent" value="1_2" required> 1–2 часа</label>
-                <label><input type="radio" name="time_spent" value="3_4" required> 3–4 часа</label>
-                <label><input type="radio" name="time_spent" value="more_than_4" required> Более 4 часов</label>
-                <label><input type="radio" name="time_spent" value="none" required> Не играю в будни</label>
-            </div>
-
-            <div class="question-group">
-                <h3>3. Как, по вашему мнению, игры влияют на вашу учёбу? <span style="color: var(--accent-color);">*</span></h3>
-                <label><input type="radio" name="impact" value="positive" required> Помогают расслабиться и восстановиться</label>
-                <label><input type="radio" name="impact" value="negative" required> Отвлекают и мешают учёбе</label>
-                <label><input type="radio" name="impact" value="neutral" required> Не влияют вообще</label>
-                <label><input type="radio" name="impact" value="unsure" required> Затрудняюсь ответить</label>
-            </div>
-
-            <div class="question-group">
-                <h3>4. Играете ли вы в игры с одногруппниками/друзьями из университета? <span style="color: var(--accent-color);">*</span></h3>
-                <label><input type="radio" name="with_friends" value="often" required> Да, часто</label>
-                <label><input type="radio" name="with_friends" value="sometimes" required> Иногда</label>
-                <label><input type="radio" name="with_friends" value="rarely" required> Редко</label>
-                <label><input type="radio" name="with_friends" value="never" required> Никогда</label>
-            </div>
-
-            <div class="question-group">
-                <h3>5. Заметили ли вы какие-либо положительные эффекты от игр (например, развитие логики, реакции, общения)? <span style="color: var(--accent-color);">*</span></h3>
-                <label><input type="radio" name="positive_effects" value="many" required> Да, много положительного</label>
-                <label><input type="radio" name="positive_effects" value="some" required> Скорее да</label>
-                <label><input type="radio" name="positive_effects" value="few" required> Скорее нет</label>
-                <label><input type="radio" name="positive_effects" value="none" required> Нет, только негатив</label>
-            </div>
-
-            <input type="submit" value="Отправить">
-        </form>
-    </div>
-</body>
-</html>
