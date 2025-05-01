@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Опрос: Влияние видеоигр на студентов</title>
+    <style>
+        :root {
+            --primary-color: #4a6da7;
+            --accent-color: #ff6b6b;
+            --bg-color: #f5f7fa;
+            --text-color: #333;
+            --border-color: #ddd;
+            --box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .survey-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: var(--box-shadow);
+            padding: 30px;
+        }
+        
+        h2 {
+            color: var(--primary-color);
+            margin-top: 0;
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            font-size: 1.8rem;
+        }
+        
+        h3 {
+            color: var(--primary-color);
+            margin-top: 25px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        p {
+            margin-bottom: 20px;
+        }
+        
+        .question-group {
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .question-group:last-of-type {
+            border-bottom: none;
+        }
+        
+        label {
+            display: block;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        
+        label:hover {
+            background-color: rgba(74, 109, 167, 0.1);
+        }
+        
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+        
+        input[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: var(--transition);
+            margin-top: 20px;
+        }
+        
+        input[type="submit"]:hover {
+            background-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="survey-container">
+        <h2>Опрос: Влияние видеоигр на студентов</h2>
+        <p>Многие студенты регулярно играют в видеоигры, и это влияет на их учёбу и повседневную жизнь.</p>
+
+        <form action="#" method="post">
+            <div class="question-group">
+                <h3>1. Играете ли вы в видеоигры во время учёбы в университете?</h3>
+                <label><input type="radio" name="gaming_frequency" value="daily" required> Да, почти каждый день</label>
+                <label><input type="radio" name="gaming_frequency" value="several_times" required> Да, несколько раз в неделю</label>
+                <label><input type="radio" name="gaming_frequency" value="rarely" required> Редко</label>
+                <label><input type="radio" name="gaming_frequency" value="never" required> Вообще не играю</label>
+            </div>
+
+            <div class="question-group">
+                <h3>2. Сколько времени в среднем вы проводите за играми в будни?</h3>
+                <label><input type="radio" name="time_spent" value="less_than_1" required> Менее часа</label>
+                <label><input type="radio" name="time_spent" value="1_2" required> 1–2 часа</label>
+                <label><input type="radio" name="time_spent" value="3_4" required> 3–4 часа</label>
+                <label><input type="radio" name="time_spent" value="more_than_4" required> Более 4 часов</label>
+                <label><input type="radio" name="time_spent" value="none" required> Не играю в будни</label>
+            </div>
+
+            <div class="question-group">
+                <h3>3. Как, по вашему мнению, игры влияют на вашу учёбу?</h3>
+                <label><input type="radio" name="impact" value="positive" required> Помогают расслабиться и восстановиться</label>
+                <label><input type="radio" name="impact" value="negative" required> Отвлекают и мешают учёбе</label>
+                <label><input type="radio" name="impact" value="neutral" required> Не влияют вообще</label>
+                <label><input type="radio" name="impact" value="unsure" required> Затрудняюсь ответить</label>
+            </div>
+
+            <div class="question-group">
+                <h3>4. Играете ли вы в игры с одногруппниками/друзьями из университета?</h3>
+                <label><input type="radio" name="with_friends" value="often" required> Да, часто</label>
+                <label><input type="radio" name="with_friends" value="sometimes" required> Иногда</label>
+                <label><input type="radio" name="with_friends" value="rarely" required> Редко</label>
+                <label><input type="radio" name="with_friends" value="never" required> Никогда</label>
+            </div>
+
+            <div class="question-group">
+                <h3>5. Заметили ли вы какие-либо положительные эффекты от игр (например, развитие логики, реакции, общения)?</h3>
+                <label><input type="radio" name="positive_effects" value="many" required> Да, много положительного</label>
+                <label><input type="radio" name="positive_effects" value="some" required> Скорее да</label>
+                <label><input type="radio" name="positive_effects" value="few" required> Скорее нет</label>
+                <label><input type="radio" name="positive_effects" value="none" required> Нет, только негатив</label>
+            </div>
+
+            <input type="submit" value="Отправить">
+        </form>
+    </div>
+</body>
+</html>
