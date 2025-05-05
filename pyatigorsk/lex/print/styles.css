@@ -162,6 +162,44 @@ a:hover {
 }
 
 /* Услуги */
+.service-item {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    margin-bottom: 20px;
+}
+
+.service-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+}
+
+.service-content {
+    text-align: center;
+}
+
+.service-content h4 {
+    color: var(--primary-color);
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.service-content .price {
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.service-content p {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+}
 .service-card {
     background-color: #fff;
     border-radius: 10px;
@@ -480,5 +518,9 @@ a:hover {
     
     .service-img {
         height: 160px;
+    }
+
+   .portfolio-item img {
+        height: 180px;
     }
 }

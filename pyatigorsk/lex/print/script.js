@@ -103,5 +103,103 @@ $(document).ready(function() {
         
         // Здесь можно добавить код для открытия модального окна с изображением
         console.log('Открыть изображение:', imgSrc, title, description);
-    });}
-);
+    });
+    // Загрузка данных из copy.json и создание элементов услуг
+    $.getJSON('copy.json', function(data) {
+        // Очищаем существующие элементы услуг
+        $('#services .row').empty();
+        
+        // Добавляем новые элементы из JSON файла
+        $.each(data.services, function(index, item) {
+            const serviceItem = `
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="service-item">
+                        <div class="service-content">
+                            <h4>${item.title}</h4>
+                            <div class="price">${item.price}</div>
+                            <p>${item.description}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            $('#services .row').append(serviceItem);
+        });
+    }).fail(function(jqxhr, textStatus, error) {
+        console.error("Ошибка загрузки JSON: " + textStatus + ", " + error);
+    });
+});
+
+// Создание элементов услуг напрямую
+$(document).ready(function() {
+    const services = [
+        {
+            title: "Печать флагов",
+            price: "от 350 ₽",
+            description: "Качественная печать флагов любых размеров"
+        },
+        {
+            title: "Переплет дипломов",
+            price: "от 250 ₽",
+            description: "Профессиональный переплет дипломных работ"
+        },
+        {
+            title: "Брендирование",
+            price: "от 150 ₽",
+            description: "Брендирование различных поверхностей"
+        },
+        {
+            title: "Печать студенческих планшетов",
+            price: "от 500 ₽",
+            description: "ПВХ пластик"
+        },
+        {
+            title: "Изготовление календарей",
+            price: "от 450 ₽",
+            description: "Календари различных форматов"
+        },
+        {
+            title: "Печать баннер, ролапп, самоклейка",
+            price: "Цена по запросу",
+            description: "Широкоформатная печать рекламных материалов"
+        },
+        {
+            title: "Световые короба",
+            price: "Цена по запросу",
+            description: "Изготовление световых коробов"
+        },
+        {
+            title: "Ксерокс, печать",
+            price: "Цена по запросу",
+            description: "Копировальные услуги"
+        },
+        {
+            title: "Печать проектной документации",
+            price: "Цена по запросу",
+            description: "Печать чертежей и документации"
+        },
+        {
+            title: "Широкоформатная печать",
+            price: "Цена по запросу",
+            description: "Печать строительных чертежей"
+        }
+    ];
+
+    // Очищаем существующие элементы
+    $('#services .row').empty();
+    
+    // Добавляем все услуги
+    services.forEach(function(service) {
+        const serviceHTML = `
+            <div class="col-md-4 col-sm-6">
+                <div class="service-item">
+                    <div class="service-content">
+                        <h4>${service.title}</h4>
+                        <div class="price">${service.price}</div>
+                        <p>${service.description}</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        $('#services .row').append(serviceHTML);
+    });
+});
