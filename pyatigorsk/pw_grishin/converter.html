@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конвертер единиц веса</title>
+    <style>
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #1976D2;
+            --background-color: #f5f5f5;
+            --card-background: #ffffff;
+            --text-color: #333333;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--primary-color);
+            margin-bottom: 30px;
+        }
+
+        .converter-form {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        .unit-group {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .unit-group h3 {
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+        }
+
+        .results-container {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .result-item {
+            padding: 10px;
+            background-color: #e3f2fd;
+            border-radius: 5px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .result-item:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .result-value {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        .result-unit {
+            color: var(--text-color);
+            font-size: 0.9em;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            .converter-form {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Конвертер единиц веса</h1>
+        <div class="converter-form">
+            <div class="input-group">
+                <label for="value">Значение:</label>
+                <input type="number" id="value" step="any" value="0">
+            </div>
+            <div class="input-group">
+                <label for="fromUnit">Из:</label>
+                <select id="fromUnit"></select>
+            </div>
+
+        </div>
+        <div class="results-container" id="results"></div>
+    </div>
+
+    <script>
+        function winogradMatrixMultiply(A, B) {
+            const M = A.length;
+            const N = B.length;
+            const Q = B[0].length;
+            
+            const rowFactor = new Array(M).fill(0);
+            const colFactor = new Array(Q).fill(0);
+            
+            for(let i = 0; i < M; i++) {
+                for(let j = 0; j < N-1; j += 2) {
+                    rowFactor[i] += A[i][j] * A[i][j+1];
+                }
+            }
+            
+            for(let i = 0; i < Q; i++) {
+                for(let j = 0; j < N-1; j += 2) {
+                    colFactor[i] += B[j][i] * B[j+1][i];
+                }
+            }
+
+            const C = Array(M).fill().map(() => Array(Q).fill(0));
+            
+            for(let i = 0; i < M; i++) {
+                for(let j = 0; j < Q; j++) {
+                    C[i][j] = -rowFactor[i] - colFactor[j];
+                    for(let k = 0; k < N-1; k += 2) {
+                        C[i][j] += (A[i][k] + B[k+1][j]) * (A[i][k+1] + B[k][j]);
+                    }
+                }
+            }
+  
+            if(N % 2 === 1) {
+                for(let i = 0; i < M; i++) {
+                    for(let j = 0; j < Q; j++) {
+                        C[i][j] += A[i][N-1] * B[N-1][j];
+                    }
+                }
+            }
+            
+            return C;
+        }
+
+        const units = {
+            'килотонна': 1e9,
+            'тонна': 1e6,
+            'килоньютон': 101971.621298,
+            'центнер': 1e5,
+            'килограмм': 1e3,
+            'ньютон': 101.971621298,
+            'грамм': 1,
+            'карат': 0.2,
+            'центиграмм': 0.01,
+            'миллиграмм': 0.001,
+            'микрограмм': 0.000001,
+            'единица атомной массы': 1.660539067e-24,
+            'тройский фунт': 373.2417216,
+            'тройская унция': 31.1034768,
+            'пеннивейт': 1.55517384,
+            'английский карат': 0.205196548333,
+            'гран': 0.0647989,
+            'майт': 0.00324,
+            'дойт': 0.000135,
+            'дань': 50000,
+            'цзинь': 500,
+            'лян': 50,
+            'цянь': 5,
+            'фэнь': 0.5,
+            'ли': 0.05,
+            'хао': 0.005,
+            'сы': 0.0005,
+            'ху': 0.00005,
+            'длинная тонна': 1016046.9088,
+            'короткая тонна': 907184.74,
+            'килофунт': 453592.37,
+            'длинный центнер': 50802.345,
+            'короткий центнер': 45359.237,
+            'стоун': 6350.29318,
+            'фунт': 453.59237,
+            'унция': 28.349523125,
+            'драхма': 1.7718451953125,
+            'британский аптечный фунт': 373.2417216,
+            'британская аптечная унция': 31.1034768,
+            'британская аптечная драхма': 3.8879346,
+            'скрупул': 1.2959782,
+            'кан': 3750,
+            'кин': 600,
+            'хиакумэ': 375,
+            'моммэ': 3.75,
+            'фун': 0.375,
+            'берковец': 163800,
+            'пуд': 16380,
+            'русский фунт': 409.5,
+            'лот': 12.797,
+            'золотник': 4.266,
+            'доля': 0.044
+        };
+
+        const fromUnitSelect = document.getElementById('fromUnit');
+        for (const unit in units) {
+            fromUnitSelect.add(new Option(unit));
+        }
+
+        function convert() {
+            const value = parseFloat(document.getElementById('value').value);
+            const fromUnit = document.getElementById('fromUnit').value;
+            const resultsContainer = document.getElementById('results');
+            resultsContainer.innerHTML = '';
+
+            for (const toUnit in units) {
+                const A = [[value * units[fromUnit]]];
+                const B = [[1 / units[toUnit]]];
+
+                const result = winogradMatrixMultiply(A, B)[0][0];
+                const resultElement = document.createElement('div');
+                resultElement.className = 'result-item';
+                let formattedResult;
+
+                if (result >= 1e9 || result <= 1e-9) {
+                    formattedResult = result.toExponential(5);
+                } else {
+                    formattedResult = result.toLocaleString('ru-RU', {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 9,
+                        useGrouping: true
+                    });
+                }
+
+                resultElement.innerHTML = `
+                    <div class="result-value">${formattedResult}</div>
+                    <div class="result-unit">${toUnit}</div>
+                `;
+                resultsContainer.appendChild(resultElement);
+            }
+        }
+
+        document.getElementById('value').addEventListener('input', convert);
+        document.getElementById('fromUnit').addEventListener('change', convert);
+
+        convert();
+    </script>
+</body>
+</html>

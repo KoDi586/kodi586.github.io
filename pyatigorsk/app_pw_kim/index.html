@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Конвертер единиц длины</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Конвертер единиц длины</h1>
+        <div class="input-group">
+            <input type="number" id="input" placeholder="Введите значение">
+            <select id="fromUnit">
+                <!-- Метрические -->
+                <option value="km">Километр (км)</option>
+                <option value="m">Метр (м)</option>
+                <option value="dm">Дециметр (дм)</option>
+                <option value="cm">Сантиметр (см)</option>
+                <option value="mm">Миллиметр (мм)</option>
+                <option value="um">Микрометр (мкм)</option>
+                <option value="nm">Нанометр (нм)</option>
+                <option value="angstrom">Ангстрем (А)</option>
+                
+                <!-- Астрономические -->
+                <option value="pc">Парсек (пк)</option>
+                <option value="ly">Световой год</option>
+                <option value="au">Астрономическая единица (а.е.)</option>
+                <option value="light_min">Световая минута</option>
+                <option value="light_sec">Световая секунда</option>
+                
+                <!-- Китайские -->
+                <option value="li">Ли (市里)</option>
+                <option value="yin">Инь (引)</option>
+                <option value="zhang">Жанг (市丈)</option>
+                <option value="bu">Бу (步)</option>
+                <option value="chi">Чи (市尺)</option>
+                <option value="cun">Цунь (市寸)</option>
+                <option value="fen">Фень (市分)</option>
+                <option value="li_small">Ли малое (釐/厘)</option>
+                <option value="hao">Хао (毫)</option>
+                <option value="si">Сы (丝)</option>
+                <option value="hu">Ху (忽)</option>
+                
+                <!-- Японские -->
+                <option value="ri">Ри (里)</option>
+                <option value="cho">Тё (町)</option>
+                <option value="jo">Дзё (丈)</option>
+                <option value="hiro">Хиро (尋)</option>
+                <option value="ken">Кэн (間)</option>
+                <option value="shaku">Сяку (尺)</option>
+                <option value="sun">Сун (寸)</option>
+                <option value="bu_jp">Бу (分)</option>
+                <option value="rin">Рин (厘)</option>
+                <option value="mo">Мо (毛/毫)</option>
+                
+                <!-- Английские/Американские -->
+                <option value="league">Лига</option>
+                <option value="mile">Миля (mi)</option>
+                <option value="land">Лэнд</option>
+                <option value="furlong">Фарлонг</option>
+                <option value="bolt">Болт</option>
+                <option value="chain">Чейн</option>
+                <option value="pole">Поль</option>
+                <option value="rod">Род (rd)</option>
+                <option value="perch">Перч</option>
+                <option value="yard">Ярд (yd)</option>
+                <option value="foot">Фут (ft)</option>
+                <option value="span">Спан</option>
+                <option value="hand">Хенд</option>
+                <option value="inch">Дюйм (in)</option>
+                <option value="line">Линия</option>
+                <option value="mil">Мил</option>
+                <option value="microinch">Микродюйм</option>
+                
+                <!-- Морские -->
+                <option value="nautical_league">Морская лига</option>
+                <option value="nautical_mile">Морская миля</option>
+                <option value="cable">Кабельтов</option>
+                <option value="fathom">Морская сажень</option>
+                
+                <!-- Старорусские -->
+                <option value="old_mile">Миля</option>
+                <option value="verst">Верста</option>
+                <option value="verst_mezhevaya">Межевая верста</option>
+                <option value="sazhen_kosaya">Косая сажень</option>
+                <option value="sazhen">Сажень</option>
+                <option value="sazhen_makhovaya">Маховая сажень</option>
+                <option value="arshin">Аршин</option>
+                <option value="old_foot">Фут</option>
+                <option value="pyad">Пядь</option>
+                <option value="vershok">Вершок</option>
+                <option value="old_inch">Дюйм</option>
+            </select>
+        </div>
+        <div id="results" class="results-grid"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
