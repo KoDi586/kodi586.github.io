@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Раздели и укради - Презентация</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #3f51b5;
+            --secondary-color: #2c3e50;
+            --accent-color: #3498db;
+            --text-color: #ffffff;
+            --background-dark: #121212;
+            --slide-bg: #2c3e50;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--background-dark);
+            color: var(--text-color);
+            overflow: hidden;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+        }
+
+        .slide {
+            width: 100%;
+            height: 100%;
+            padding: 60px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+            background: var(--slide-bg);
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%233498db' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+    }
+
+    .slide::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        background: var(--accent-color);
+    }
+
+    /* Удаляем старые классы для разных фонов */
+    /* .slide-1, .slide-2, .slide-3, .slide-4, .slide-5, .slide-6, .slide-7 { ... } */
+
+        .slide.active {
+            opacity: 1;
+            z-index: 1;
+            transform: scale(1) translateX(0);
+        }
+
+        .slide:not(.active) {
+            transform: scale(0.95) translateX(-100px);
+        }
+
+        .slide-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 1.2em;
+            opacity: 0.7;
+        }
+
+        h1 {
+            font-size: 4em;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        h2 {
+            font-size: 2.8em;
+            margin-bottom: 30px;
+            color: var(--text-color);
+            position: relative;
+            display: inline-block;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .subtitle {
+            font-size: 1.8em;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 600;
+        }
+
+        p {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .game-matrix {
+            margin: 40px auto;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            overflow: hidden;
+            transform: perspective(1000px) rotateX(5deg);
+            transition: transform 0.5s ease;
+        }
+
+        .game-matrix:hover {
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .game-matrix td, .game-matrix th {
+            padding: 25px 50px;
+            border: 2px solid rgba(255,255,255,0.2);
+            text-align: center;
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+        }
+
+        .game-matrix th {
+            background: rgba(0,0,0,0.2);
+            font-weight: 600;
+        }
+
+        .game-matrix td:hover {
+            background: rgba(255,255,255,0.2);
+            transform: scale(1.05);
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 100;
+            display: flex;
+            gap: 20px;
+        }
+
+        .btn {
+            background: rgba(255,255,255,0.15);
+            border: 2px solid rgba(255,255,255,0.3);
+            color: white;
+            padding: 12px 30px;
+            cursor: pointer;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+            font-size: 0.9em;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .btn:active {
+            transform: translateY(-1px);
+        }
+
+        .speaker-notes {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0,0,0,0.85);
+            color: #fff;
+            padding: 20px;
+            font-style: italic;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            border-top: 2px solid var(--accent-color);
+            backdrop-filter: blur(10px);
+            z-index: 99;
+        }
+
+        .speaker-notes.visible {
+            transform: translateY(0);
+        }
+
+        .bullet-points {
+            text-align: left;
+            margin: 30px auto;
+            max-width: 800px;
+            list-style-type: none;
+        }
+
+        .bullet-points li {
+            margin: 25px 0;
+            padding-left: 40px;
+            position: relative;
+            font-size: 1.3em;
+            line-height: 1.5;
+            opacity: 0;
+            transform: translateX(-20px);
+            animation: slideIn 0.5s ease forwards;
+        }
+
+        .bullet-points li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .bullet-points li:nth-child(1) { animation-delay: 0.2s; }
+        .bullet-points li:nth-child(2) { animation-delay: 0.4s; }
+        .bullet-points li:nth-child(3) { animation-delay: 0.6s; }
+        .bullet-points li:nth-child(4) { animation-delay: 0.8s; }
+        .bullet-points li:nth-child(5) { animation-delay: 1.0s; }
+        .bullet-points li:nth-child(6) { animation-delay: 1.2s; }
+
+        .highlight {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .two-column {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 40px;
+            margin-top: 30px;
+        }
+
+        .column {
+            flex: 1;
+            text-align: left;
+        }
+
+        .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            color: var(--accent-color);
+        }
+
+        .scenario-box {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px auto;
+            max-width: 800px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.1);
+            text-align: left;
+        }
+
+        .progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 5px;
+            background: var(--accent-color);
+            z-index: 100;
+            transition: width 0.3s ease;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-bar"></div>
+    
+    <div class="presentation">
+        <!-- Slide 1 - Title -->
+        <div class="slide active">
+            <div class="slide-content">
+                <h1>«Раздели и укради»</h1>
+                <div class="subtitle">Матричная игра</div>
+                <p>Двухигроковая, одномоментная игра с выбором: <span class="highlight">Split</span> или <span class="highlight">Steal</span></p>
+                <p>Приз = 100 единиц</p>
+            </div>
+            <div class="slide-number">1/7</div>
+        </div>
+
+        <!-- Slide 2 - Rules and Matrix -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Правила и матрица выплат</h2>
+                <table class="game-matrix">
+                    <tr>
+                        <th>P1 \ P2</th>
+                        <th>Split</th>
+                        <th>Steal</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Split</strong></td>
+                        <td>(50, 50)</td>
+                        <td>(0, 100)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Steal</strong></td>
+                        <td>(100, 0)</td>
+                        <td>(0, 0)</td>
+                    </tr>
+                </table>
+                <p>Запись (a, b) — выплата P1 = a, P2 = b</p>
+            </div>
+            <div class="slide-number">2/7</div>
+        </div>
+
+        <!-- Slide 3 - Dominant Strategy -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Доминирующая стратегия</h2>
+                <ul class="bullet-points">
+                    <li>Для каждого игрока стратегия <span class="highlight">Steal</span> доминирует над <span class="highlight">Split</span></li>
+                    <li>Если соперник выбирает <span class="highlight">Split</span>, то <span class="highlight">Steal</span> приносит 100 vs 50</li>
+                    <li>Если соперник выбирает <span class="highlight">Steal</span>, то <span class="highlight">Steal</span> приносит 0 vs 0</li>
+                    <li>Единственное равновесие Нэша: <span class="highlight">(Steal, Steal)</span> → (0,0)</li>
+                </ul>
+            </div>
+            <div class="slide-number">3/7</div>
+        </div>
+
+        <!-- Slide 4 - Pareto Optimality -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Парето-оптимальность</h2>
+                <ul class="bullet-points">
+                    <li>Парето-оптимальный исход: <span class="highlight">(Split, Split)</span> — суммарная выгода 100</li>
+                    <li>Но (Split, Split) не устойчиво к индивидуальному отклонению</li>
+                    <li>Классический конфликт между индивидуальным рациональным выбором и коллективно выгодным исходом</li>
+                </ul>
+                <div class="scenario-box">
+                    <p>Смешанные стратегии не дают устойчивой «равновесной» диверсификации в этом классическом варианте, так как Steal доминирует при любом q>0.</p>
+                </div>
+            </div>
+            <div class="slide-number">4/7</div>
+        </div>
+
+        <!-- Slide 5 - Player Behavior -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Типичные стратегии игроков</h2>
+                <div class="two-column">
+                    <div class="column">
+                        <div class="icon">👤</div>
+                        <h3>Рациональный эгоист</h3>
+                        <p>Выбирает <span class="highlight">Steal</span> — максимизация собственной выгоды</p>
+                    </div>
+                    <div class="column">
+                        <div class="icon">🤝</div>
+                        <h3>Альтруист</h3>
+                        <p>Выбирает <span class="highlight">Split</span>, надеясь на взаимность</p>
+                    </div>
+                </div>
+                <div class="two-column">
+                    <div class="column">
+                        <div class="icon">🔄</div>
+                        <h3>Мстительный</h3>
+                        <p>В многократной игре использует условные стратегии (Tit-for-Tat)</p>
+                    </div>
+                    <div class="column">
+                        <div class="icon">💬</div>
+                        <h3>Коммуникатор</h3>
+                        <p>Использует общение перед ходом для достижения Split-Split</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slide-number">5/7</div>
+        </div>
+
+        <!-- Slide 6 - Game Variations -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Варианты игры и модификации</h2>
+                <ul class="bullet-points">
+                    <li><span class="highlight">Повторяющаяся игра</span> — возможна кооперация с помощью стратегий вознаграждения/наказания</li>
+                    <li><span class="highlight">Штраф за воровство</span> — если к ворующему добавляется отрицательная выплата</li>
+                    <li><span class="highlight">Репутация</span> — демонстрация прошлых ходов повышает доверие</li>
+                    <li><span class="highlight">Частичная кража</span> — вариант с дробными выплатами</li>
+                    <li><span class="highlight">Многопользовательская версия</span> — появляются другие динамики (коалиции)</li>
+                </ul>
+            </div>
+            <div class="slide-number">6/7</div>
+        </div>
+
+        <!-- Slide 7 - Conclusion -->
+        <div class="slide">
+            <div class="slide-content">
+                <h2>Заключение</h2>
+                <div class="scenario-box pulse">
+                    <p>«Два участника получают сумку с 100 монетами. Каждый одновременно пишет: <span class="highlight">Разделить</span> или <span class="highlight">Украсть</span>. Если оба <span class="highlight">Разделить</span> — по 50. Если один <span class="highlight">Украсть</span> — тот получает 100, другой 0. Если оба <span class="highlight">Украсть</span> — оба 0. Что выберешь ты?»</p>
+                </div>
+                <ul class="bullet-points">
+                    <li>Классический результат: индивидуальная рациональность ведёт к (Steal, Steal)</li>
+                    <li>Для достижения кооперации нужны внешние механизмы</li>
+                    <li>Игра демонстрирует важность институтов и социальных норм</li>
+                </ul>
+            </div>
+            <div class="slide-number">7/7</div>
+        </div>
+    </div>
+
+    <div class="controls">
+        <button class="btn" onclick="prevSlide()">Назад</button>
+        <button class="btn" onclick="toggleNotes()">Заметки</button>
+        <button class="btn" onclick="nextSlide()">Вперед</button>
+    </div>
+
+    <div class="speaker-notes">
+        Заметки докладчика будут появляться здесь
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const speakerNotes = document.querySelector('.speaker-notes');
+        const progressBar = document.querySelector('.progress-bar');
+        
+        const notes = [
+            "Это классическая игра, где личный интерес конфликтует с коллективной выгодой. Мы рассмотрим матрицу выплат и логические выводы.",
+            "Если оба разделяют — получают по 50. Если один крадёт, второй остаётся с нулём, если оба крадут — тоже ноль.",
+            "Хотя коллективно лучше разделить, рациональный индивидуум предпочитает украсть — это приводит к плохому результату для обоих.",
+            "Игра показывает разрыв между личной выгодой и общей эффективностью — типичная дилемма взаимодействия.",
+            "Поведение игроков может отличаться от теоретически оптимального из-за социальных предпочтений, репутации и других факторов.",
+            "Если игра повторяется или введены штрафы/репутация, люди могут поддерживать кооперацию.",
+            "Итак, теория подсказывает одно, поведение людей — другое. Контекст и механизмы меняют результат."
+        ];
+
+        function updateProgressBar() {
+            const progress = ((currentSlide + 1) / slides.length) * 100;
+            progressBar.style.width = `${progress}%`;
+        }
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
+            speakerNotes.textContent = notes[currentSlide];
+            updateProgressBar();
+        }
+
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
+
+        function prevSlide() {
+            showSlide(currentSlide - 1);
+        }
+
+        function toggleNotes() {
+            speakerNotes.classList.toggle('visible');
+        }
+
+        // Initialize progress bar
+        updateProgressBar();
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight') nextSlide();
+            if (e.key === 'ArrowLeft') prevSlide();
+            if (e.key === 'n') toggleNotes();
+        });
+
+        // Auto-start animations when slide becomes active
+        function resetAnimations(slide) {
+            const elements = slide.querySelectorAll('.bullet-points li');
+            elements.forEach(el => {
+                el.style.animation = 'none';
+                el.offsetHeight; // Trigger reflow
+                el.style.animation = null;
+            });
+        }
+
+        // Reset animations when changing slides
+        slides.forEach(slide => {
+            slide.addEventListener('transitionend', function() {
+                if (this.classList.contains('active')) {
+                    resetAnimations(this);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
