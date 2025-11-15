@@ -203,9 +203,10 @@
             <div style="width:100%">
                 <div class="photo-placeholder" id="photoPlaceholder">
                     <!-- Здесь место для вашей фотографии / логотипа. Замените на <img src="..."> -->
+                    <img src="img_2.png">
                     <div style="text-align:center;color:var(--muted)">
-                        <div style="font-size:18px;font-weight:700">Ваше фото / логотип</div>
-                        <div class="small">PNG / JPG • 1200×800 рекомендуется</div>
+<!--                        <div style="font-size:18px;font-weight:700">Ваше фото / логотип</div>-->
+<!--                        <div class="small">PNG / JPG • 1200×800 рекомендуется</div>-->
                     </div>
                 </div>
             </div>
@@ -256,46 +257,86 @@
     </main>
 
     <!-- TEAM SECTION START -->
-    <section class="team-section">
-        <h2>Основатели</h2>
-        <div class="founders">
-            <div class="founder">
-                <!-- Фото основателя -->
-                 <img src="img.png" alt="Founder 1" class="founder-photo" />
+    <section class="team-section" style="margin-top:40px">
+        <h2 style="margin-bottom:18px">Основатели</h2>
 
-                <!-- ФИО -->
-                <p class="fio">Ким Данил</p>
+        <div class="founders-row" style="
+        display:flex;
+        gap:20px;
+        justify-content:space-between;
+        align-items:flex-start;
+        flex-wrap:wrap;
+    ">
 
-                <!-- Телеграм -->
-                <!-- Пример: <a href="https://t.me/USERNAME" target="_blank">@USERNAME</a> -->
-                <a href="" class="https://t.me/KkkkimDa">@KkkkimDa</a>
+            <!-- Founder 1 -->
+            <div class="founder card" style="
+            flex:1;
+            min-width:260px;
+            display:flex;
+            align-items:center;
+            gap:14px;
+            padding:18px;
+        ">
+                <!-- Фото (в 2 раза меньше) -->
+                <div style="width:90px;height:90px;flex-shrink:0;">
+                    <img src="img.png"
+                         alt="Founder 1"
+                         style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+                </div>
 
-                <!-- Телефон -->
-                <p class="phone">+7 922 799 7002</p>
+                <!-- Текстовый блок -->
+                <div style="display:flex;flex-direction:column;gap:4px">
+                    <p style="margin:0;font-size:16px;font-weight:600">Ким Данил</p>
 
-                <!-- QR код -->
-                <!-- <img src="PATH_TO_QR_1" alt="QR Telegram 1" class="qr-code" /> -->
+                    <!-- Телеграм -->
+                    <!-- Так пишется корректная ссылка @username -->
+                    <a href="https://t.me/KkkkimDa" target="_blank"
+                       style="color:var(--accent);text-decoration:none;font-size:14px;">
+                        @KkkkimDa
+                    </a>
+
+                    <!-- Телефон -->
+                    <p style="margin:0;color:var(--muted);font-size:14px">+7 922 799 7002</p>
+
+                    <!-- QR -->
+                    <!-- <img src="PATH_TO_QR_1" class="qr" /> -->
+                </div>
             </div>
 
-            <div class="founder">
-                <!-- Фото основателя -->
-                 <img src="img_1.png" alt="Founder 2" class="founder-photo" />
+            <!-- Founder 2 -->
+            <div class="founder card" style="
+            flex:1;
+            min-width:260px;
+            display:flex;
+            align-items:center;
+            gap:14px;
+            padding:18px;
+        ">
+                <div style="width:90px;height:90px;flex-shrink:0;">
+                    <img src="img_1.png"
+                         alt="Founder 2"
+                         style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
+                </div>
 
-                <!-- ФИО -->
-                <p class="fio">Гришин Иван</p>
+                <div style="display:flex;flex-direction:column;gap:4px">
+                    <p style="margin:0;font-size:16px;font-weight:600">Гришин Иван</p>
 
-                <!-- Телеграм -->
-                <a href="" class="https://t.me/dayr1man">@dayr1man</a>
+                    <a href="https://t.me/dayr1man" target="_blank"
+                       style="color:var(--accent);text-decoration:none;font-size:14px;">
+                        @dayr1man
+                    </a>
 
-                <!-- Телефон -->
-                <p class="phone">+7 962 005 9313</p>
+                    <p style="margin:0;color:var(--muted);font-size:14px">+7 962 005 9313</p>
 
-                <!-- QR код -->
-                <!-- <img src="PATH_TO_QR_2" alt="QR Telegram 2" class="qr-code" /> -->
+                    <!-- QR -->
+                    <!-- <img src="PATH_TO_QR_2" class="qr" /> -->
+                </div>
             </div>
+
         </div>
     </section>
     <!-- TEAM SECTION END -->
+
 
     <footer>
         <div>© <span id="year"></span> GorskWorkSpace — команда разработки. Все права защищены.</div>
