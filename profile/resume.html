@@ -1,360 +1,1075 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GWS — Команда разработки и выполнения проектов</title>
-    <meta name="description" content="GorskWorkSpace — команда разработчиков, дизайнеров и ML-инженеров. Выполняем проекты под ключ и помогаем прокачать специалистов." />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      GorskWorkSpace — Разработка веб и мобильных приложений на заказ |
+      Аутсорсинг IT-команд | Москва
+    </title>
+    <meta
+      name="description"
+      content="Разработка сложных веб-приложений, мобильных приложений и SaaS-продуктов под ключ. Аутсорсинг команд разработчиков. 8+ лет опыта, 120+ проектов. Senior React, Node.js, Python, Flutter, Go команды. Гарантия 12 месяцев."
+    />
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="GorskWorkSpace — Разработка ПО на заказ и IT-аутсорсинг"
+    />
+    <meta
+      property="og:description"
+      content="Создаём сложные цифровые продукты: веб-приложения, мобильные приложения, SaaS, стартапы. 8 лет опыта, 120+ проектов, гарантия на код 12 месяцев."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://gorskworkspace.com" />
+    <meta
+      property="og:image"
+      content="https://gorskworkspace.com/og-image.jpg"
+    />
+    <!-- Favicon -->
+    <link rel="icon" href="/favicon.ico" />
+    <!-- Шрифты -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Font Awesome для иконок -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
     <style>
-        :root{
-            --bg:#0b0f14;
-            --card:#0f1720;
-            --muted:#9aa6b2;
-            --accent:#6ee7b7;
-            --accent-2:#60a5fa;
-            --glass: rgba(255,255,255,0.03);
-            --radius:14px;
-            --max:1200px;
-            --accent-contrast:#05261b;
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      :root {
+        --primary: #c084fc;
+        --primary: #a78bfa;
+        --primary-dark: #9333ea;
+        --accent: #e879f9;
+        --bg: #0f0a1a;
+        --card-bg: rgba(20, 15, 35, 0.6);
+        --text: #e2e8f0;
+        --text-muted: #94a3b8;
+        --border: rgba(167, 139, 250, 0.2);
+        --gradient: linear-gradient(135deg, #a78bfa 0%, #c084fc 100%);
+        --glass: rgba(30, 20, 60, 0.4);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.7;
+        overflow-x: hidden;
+        position: relative;
+      }
+
+      /* Частицы на фоне */
+      #particles {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        pointer-events: none;
+      }
+
+      /* Градиентный оверлей */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(
+            circle at 30% 70%,
+            rgba(167, 139, 250, 0.15) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 20%,
+            rgba(200, 130, 255, 0.1) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      /* Header */
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        padding: 1.4rem 0;
+        transition: all 0.5s ease;
+        backdrop-filter: blur(20px);
+        background: rgba(15, 10, 26, 0.7);
+        border-bottom: 1px solid var(--border);
+      }
+
+      header.scrolled {
+        padding: 1rem 0;
+        background: rgba(15, 10, 26, 0.95);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      nav {
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 1rem 5%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .logo {
+        font-size: 2.1rem;
+        font-weight: 900;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        letter-spacing: -1px;
+      }
+
+      .menu-toggle {
+        display: none;
+        width: 48px;
+        height: 48px;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        background: transparent;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        color: var(--text);
+        cursor: pointer;
+      }
+      .menu-toggle span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--text);
+        transition: transform 0.3s ease, opacity 0.3s ease;
+      }
+      nav.open .menu-toggle span:nth-child(1) {
+        transform: translateY(6px) rotate(45deg);
+      }
+      nav.open .menu-toggle span:nth-child(2) {
+        opacity: 0;
+      }
+      nav.open .menu-toggle span:nth-child(3) {
+        transform: translateY(-6px) rotate(-45deg);
+      }
+
+      .nav-links a {
+        margin: 0 1.6rem;
+        color: var(--text);
+        text-decoration: none;
+        font-weight: 500;
+        position: relative;
+        transition: color 0.3s;
+      }
+
+      .nav-links a::after {
+        content: "";
+        position: absolute;
+        width: 0;
+        height: 2px;
+        bottom: -8px;
+        left: 0;
+        background: var(--gradient);
+        transition: width 0.4s ease;
+      }
+
+      .nav-links a:hover {
+        color: var(--primary);
+      }
+
+      .nav-links a:hover::after {
+        width: 100%;
+      }
+
+      .cta-btn {
+        background: var(--gradient);
+        color: white;
+        padding: 0.9rem 2.2rem;
+        border-radius: 16px;
+        font-weight: 600;
+        text-decoration: none;
+        box-shadow: 0 10px 30px rgba(167, 139, 250, 0.4);
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-btn:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 20px 50px rgba(167, 139, 250, 0.6);
+      }
+
+      .cta-btn::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: 0.7s;
+      }
+
+      .cta-btn:hover::before {
+        left: 100%;
+      }
+
+      /* Hero */
+      .hero {
+        padding: 220px 0 180px;
+        text-align: center;
+        position: relative;
+      }
+
+      .hero h1 {
+        font-size: clamp(3.2rem, 8vw, 6rem);
+        font-weight: 900;
+        line-height: 1.1;
+        margin-bottom: 1.8rem;
+      }
+
+      .typing-text {
+        font-size: 1.5rem;
+        color: var(--text-muted);
+        min-height: 80px;
+        margin: 0 auto 3rem;
+        max-width: 900px;
+      }
+
+      .cursor {
+        display: inline-block;
+        background: var(--primary);
+        width: 3px;
+        height: 1.2em;
+        animation: blink 0.8s infinite;
+        margin-left: 4px;
+      }
+
+      @keyframes blink {
+        0%,
+        50% {
+          opacity: 1;
         }
-        *{box-sizing:border-box}
-        html,body{height:100%}
-        body{
-            margin:0;
-            background:linear-gradient(180deg,var(--bg),#071018 120%);
-            color:#e6eef6;
-            -webkit-font-smoothing:antialiased;
-            -moz-osx-font-smoothing:grayscale;
-            display:flex;
-            align-items:flex-start;
-            justify-content:center;
-            padding:40px 20px;
+        51%,
+        100% {
+          opacity: 0;
         }
-        .container{
-            width:100%;
-            max-width:var(--max);
+      }
+
+      .hero-buttons {
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .btn-secondary {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+        backdrop-filter: blur(12px);
+      }
+
+      .btn-secondary:hover {
+        background: var(--primary);
+        color: white;
+        transform: translateY(-5px);
+      }
+
+      /* Анимации появления */
+      .fade-up {
+        opacity: 0;
+        transform: translateY(60px);
+        transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+      }
+
+      .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Features */
+      .features-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        max-width: 1300px;
+        margin: 0 auto 80px;
+        padding: 0 5%;
+      }
+
+      .feature-card {
+        background: var(--card-bg);
+        backdrop-filter: blur(16px);
+        border: 1px solid var(--border);
+        padding: 3.5rem 2rem;
+        border-radius: 24px;
+        text-align: center;
+        transition: all 0.5s ease;
+      }
+
+      .feature-card:hover {
+        transform: translateY(-20px) scale(1.03);
+        box-shadow: 0 30px 70px rgba(167, 139, 250, 0.25);
+        border-color: var(--primary);
+      }
+
+      .feature-card i {
+        font-size: 4.5rem;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin-bottom: 1.8rem;
+        transition: transform 0.6s;
+      }
+
+      .feature-card:hover i {
+        transform: scale(1.2) rotate(8deg);
+      }
+
+      /* Stats */
+      .stats {
+        background: linear-gradient(
+          135deg,
+          rgba(20, 15, 35, 0.9),
+          rgba(10, 5, 25, 0.9)
+        );
+        padding: 140px 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stats::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url("https://images.unsplash.com/photo-1558655146-9f40138ed1cb?q=80&w=2560&auto=format&fit=crop")
+          center/cover;
+        opacity: 0.08;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 4rem;
+        max-width: 1400px;
+        margin: 0 auto;
+        padding: 0 5%;
+        position: relative;
+        z-index: 2;
+      }
+
+      .stat-number {
+        font-size: 5.5rem;
+        font-weight: 900;
+        background: var(--gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* Services */
+      .service-item {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8rem;
+        align-items: center;
+        max-width: 1300px;
+        margin: 0 auto 12rem;
+        padding: 0 5%;
+      }
+
+      .service-item:nth-child(even) {
+        direction: rtl;
+      }
+
+      .service-item:nth-child(even) > * {
+        direction: ltr;
+      }
+
+      .service-img {
+        height: 520px;
+        border-radius: 28px;
+        background-size: cover;
+        background-position: center;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+        transition: all 0.8s ease;
+        border: 1px solid var(--border);
+      }
+
+      .service-img:hover {
+        transform: scale(1.05) translateY(-10px);
+      }
+
+      .portfolio {
+        padding: 160px 0;
+      }
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        max-width: 1300px;
+        margin: 0 auto;
+        padding: 0 5%;
+      }
+      .portfolio-item {
+        position: relative;
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+        backdrop-filter: blur(12px);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        transition: transform 0.5s ease, box-shadow 0.5s ease,
+          border-color 0.5s ease;
+      }
+      .portfolio-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 30px 80px rgba(167, 139, 250, 0.25);
+        border-color: var(--primary);
+      }
+      .portfolio-item img {
+        width: 100%;
+        height: 320px;
+        object-fit: cover;
+        display: block;
+      }
+      .portfolio-caption {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: 1rem 1.2rem;
+        font-weight: 600;
+        font-size: 1rem;
+        color: var(--text);
+        background: linear-gradient(180deg, transparent, rgba(15, 10, 26, 0.9));
+      }
+
+      /* Contact */
+      .contact {
+        background: var(--gradient);
+        padding: 160px 0;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .contact form {
+        max-width: 800px;
+        margin: 4rem auto 0;
+        display: grid;
+        gap: 1.8rem;
+      }
+
+      .contact input,
+      .contact textarea {
+        padding: 1.4rem 1.8rem;
+        border-radius: 18px;
+        border: none;
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(12px);
+        color: white;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+      }
+
+      .contact input:focus,
+      .contact textarea:focus {
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.5);
+      }
+
+      .contact input::placeholder,
+      .contact textarea::placeholder {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      /* Footer */
+      footer {
+        background: #0d0718;
+        color: var(--text-muted);
+        text-align: center;
+        padding: 5rem 0;
+        font-size: 1rem;
+      }
+
+      @media (max-width: 968px) {
+        .service-item {
+          grid-template-columns: 1fr;
+          gap: 4rem;
+          text-align: center;
         }
-        header{
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:20px;
-            margin-bottom:28px;    }
-        .brand{
-            display:flex;align-items:center;gap:12px
+        .hero {
+          padding: 180px 0 120px;
         }
-        .logo{
-            width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));display:flex;align-items:center;justify-content:center;font-weight:700;color:var(--accent-contrast);font-size:20px
+        .hero-buttons {
+          flex-direction: column;
+          align-items: center;
         }
-        nav a{color:var(--muted);text-decoration:none;margin-left:18px}
-        nav a:hover{color:#fff}
-
-        .hero{
-            display:grid;
-            grid-template-columns: 1fr 420px;
-            gap:28px;
-            align-items:stretch;
+        .cta-btn,
+        .btn-secondary {
+          width: 90%;
+          max-width: 400px;
         }
-        .card{
-            background:linear-gradient(180deg,var(--card), rgba(255,255,255,0.02));
-            border-radius:var(--radius);
-            padding:28px;
-            box-shadow: 0 6px 30px rgba(2,6,23,0.7);
-            border:1px solid rgba(255,255,255,0.03);
+        .menu-toggle {
+          display: inline-flex;
         }
-        .hero-left h1{font-size:28px;margin:0 0 8px}
-        .lead{color:var(--muted);margin-bottom:18px}
-
-        .badges{display:flex;gap:8px;margin-bottom:16px}
-        .badge{background:var(--glass);padding:6px 10px;border-radius:999px;font-size:13px;color:var(--muted)}
-
-        .cta-row{display:flex;gap:12px;align-items:center;margin-top:18px}
-        .btn{background:var(--accent);color:var(--accent-contrast);padding:12px 18px;border-radius:12px;border:none;cursor:pointer;font-weight:600}
-        .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted)}
-
-        .features{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:22px}
-        .feature{background:rgba(255,255,255,0.02);padding:12px;border-radius:10px}
-        .feature h4{margin:0 0 6px}
-        .feature p{margin:0;color:var(--muted);font-size:14px}
-
-        .photo-card{display:flex;flex-direction:column;gap:12px;align-items:center;justify-content:center;text-align:center}
-        .photo-placeholder{width:100%;height:260px;border-radius:12px;background:linear-gradient(180deg,#08121a,#0d1620);display:flex;align-items:center;justify-content:center;border:1px dashed rgba(255,255,255,0.04)}
-        .photo-placeholder img{max-width:100%;max-height:100%;border-radius:10px}
-        .small{font-size:13px;color:var(--muted)}
-
-        .sections{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:20px}
-        .section h3{margin:0 0 8px}
-        .list{list-style:none;padding:0;margin:0}
-        .list li{padding:6px 0;color:var(--muted);font-size:14px}
-
-        footer{margin-top:28px;color:var(--muted);display:flex;justify-content:space-between;align-items:center}
-
-        /* responsive */
-        @media (max-width:980px){
-            .hero{grid-template-columns:1fr;}
-            .photo-placeholder{height:200px}
-            .sections{grid-template-columns:1fr}
+        .nav-links {
+          position: fixed;
+          top: 72px;
+          left: 0;
+          right: 0;
+          background: rgba(15, 10, 26, 0.95);
+          backdrop-filter: blur(20px);
+          border-bottom: 1px solid var(--border);
+          padding: 1.2rem 5%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: 1rem;
+          z-index: 999;
+          opacity: 0;
+          pointer-events: none;
+          transform: translateY(-8px);
+          transition: transform 0.35s ease, opacity 0.35s ease;
         }
+        nav.open .nav-links {
+          opacity: 1;
+          pointer-events: auto;
+          transform: none;
+        }
+        .nav-links a {
+          padding: 0.8rem 0;
+          font-size: 1.1rem;
+        }
+      }
 
-        /* small helper */
-        .pill{display:inline-block;padding:6px 10px;border-radius:999px;background:rgba(255,255,255,0.02);color:var(--muted);font-size:13px}
-        .partner-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
-        .partner{padding:8px 12px;border-radius:8px;background:rgba(255,255,255,0.02);font-size:13px;color:var(--muted)}
+      @media (max-width: 600px) {
+        .portfolio-grid {
+          grid-template-columns: 1fr;
+        }
+        .portfolio-item img {
+          height: 220px;
+        }
+        .service-img {
+          height: 300px;
+        }
+        .stat-number {
+          font-size: 3.6rem;
+        }
+        .typing-text {
+          font-size: 1.2rem;
+        }
+        .hero {
+          padding: 120px 0 100px;
+        }
+        .hero h1 {
+          font-size: 2.8rem;
+        }
+        .logo {
+          font-size: 1.6rem;
+        }
+        .cta-btn,
+        .btn-secondary {
+          width: 100%;
+          max-width: none;
+        }
+      }
 
-        .process-step{display:flex;gap:10px;align-items:flex-start}
-        .step-num{width:36px;height:36px;border-radius:10px;background:rgba(255,255,255,0.04);display:flex;align-items:center;justify-content:center;font-weight:700}
+      @media (max-width: 400px) {
+        .hero h1 {
+          font-size: 2.4rem;
+        }
+        .menu-toggle {
+          width: 44px;
+          height: 44px;
+        }
+      }
 
-        .contact-form{display:flex;flex-direction:column;gap:10px}
-        input,textarea{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:12px;border-radius:10px;color:inherit}
-        input::placeholder,textarea::placeholder{color:rgba(255,255,255,0.25)}
-
+      section[id] {
+        scroll-margin-top: 90px;
+      }
+      }
     </style>
-</head>
-<body>
-<div class="container">
+  </head>
+  <body>
+    <div id="particles"></div>
+
     <header>
-        <!-- LOGO PLACEHOLDER: вставь квадратное лого сюда -->
-        <!-- <img src="PATH_TO_LOGO" alt="GorskWorkSpace Logo" class="logo" /> -->
-        <div class="brand">
-            <div class="logo">We</div>
-            <div>
-                <strong>G.W.S.</strong>
-                <div class="small">Команда разработки • Дизайн • ML</div>
-            </div>
+      <nav>
+        <p class="logo">GorskWorkSpace</p>
+        <button class="menu-toggle" aria-label="Меню">
+          <span></span><span></span><span></span>
+        </button>
+        <div class="nav-links">
+          <a href="#services">Услуги</a>
+          <a href="#about">О нас</a>
+          <a href="#portfolio">Кейсы</a>
+          <a href="#contact">Контакты</a>
         </div>
-        <nav>
-            <a href="#about">О нас</a>
-            <a href="#services">Услуги</a>
-            <a href="#team">Команда</a>
-            <a href="#contacts">Контакты</a>
-        </nav>
+        <a href="#contact" class="cta-btn">Обсудить проект</a>
+      </nav>
     </header>
 
-    <main class="hero">
-        <section class="card hero-left">
-            <div class="badges">
-                <div class="badge">Под ключ</div>
-                <div class="badge">Проекты</div>
-                <div class="badge">Аутсорс &amp; Аутстаф</div>
+    <main>
+      <section class="hero">
+        <div class="container fade-up">
+          <h1>
+            Разрабатываем цифровые продукты,<br />которые приносят миллионы
+          </h1>
+          <div class="typing-text">
+            <span id="typed"></span><span class="cursor">|</span>
+          </div>
+          <div class="hero-buttons">
+            <a href="#contact" class="cta-btn">Рассчитать стоимость</a>
+            <a href="#portfolio" class="cta-btn btn-secondary"
+              >Посмотреть кейсы →</a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="portfolio" class="portfolio fade-up">
+        <div style="text-align: center; margin-bottom: 3rem">
+          <h2
+            style="
+              font-size: 4rem;
+              font-weight: 900;
+              background: var(--gradient);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            "
+          >
+            Кейсы
+          </h2>
+          <p style="font-size: 1.3rem; color: var(--text-muted)">
+            Часть интерфейсов и продуктов
+          </p>
+        </div>
+        <div class="portfolio-grid">
+          <a
+            class="portfolio-item"
+            href="https://meiro-event.ru"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=480&auto=format&fit=crop   480w,
+                https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=768&auto=format&fit=crop   768w,
+                https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1200&auto=format&fit=crop 1200w
+              "
+              sizes="(max-width: 600px) 100vw, (max-width: 968px) 50vw, 25vw"
+              alt="Разработка на заказ"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="portfolio-caption">Разработка на заказ</div>
+          </a>
+          <a
+            class="portfolio-item"
+            href="https://t.me/ReadMyTextBot"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=480&auto=format&fit=crop   480w,
+                https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=768&auto=format&fit=crop   768w,
+                https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=1200&auto=format&fit=crop 1200w
+              "
+              sizes="(max-width: 600px) 100vw, (max-width: 968px) 50vw, 25vw"
+              alt="Аутсорсинг команд"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="portfolio-caption">Аутсорсинг команд</div>
+          </a>
+          <a
+            class="portfolio-item"
+            href="https://t.me/LoopMakerBot"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=480&auto=format&fit=crop   480w,
+                https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=768&auto=format&fit=crop   768w,
+                https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=1200&auto=format&fit=crop 1200w
+              "
+              sizes="(max-width: 600px) 100vw, (max-width: 968px) 50vw, 25vw"
+              alt="IT-консалтинг и аудит"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="portfolio-caption">IT-консалтинг и аудит</div>
+          </a>
+          <!-- <a
+            class="portfolio-item"
+            href="https://images.unsplash.com/photo-1558655146-9f40138ed1cb?q=80&w=2560&auto=format&fit=crop"
+            target="_blank"
+            rel="noopener"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1558655146-9f40138ed1cb?q=80&w=1200&auto=format&fit=crop"
+              srcset="
+                https://images.unsplash.com/photo-1558655146-9f40138ed1cb?q=80&w=480&auto=format&fit=crop   480w,
+                https://images.unsplash.com/photo-1558655146-9f40138ed1cb?q=80&w=768&auto=format&fit=crop   768w,
+                https://images.unsplash.com/photo-1558655146-9f40138ed1cb?q=80&w=1200&auto=format&fit=crop 1200w
+              "
+              sizes="(max-width: 600px) 100vw, (max-width: 968px) 50vw, 25vw"
+              alt="Инфраструктура и масштабирование"
+              loading="lazy"
+              decoding="async"
+            />
+            <div class="portfolio-caption">
+              Инфраструктура и масштабирование
             </div>
+          </a> -->
+        </div>
+      </section>
 
-            <h1>Делаем проекты, которые работают. Полностью.</h1>
-            <p class="lead">GorskWorkSpase — команда разработчиков, дизайнеров и ML‑инженеров. Выполняем заказы под ключ и развиваем специалистов, чтобы вместе с вами довести идею до результата.</p>
+      <section class="section fade-up" id="about">
+        <div class="features-grid">
+          <div class="feature-card">
+            <i class="fas fa-rocket"></i>
+            <h3>MVP за 6–8 недель</h3>
+            <p>Запускаем рабочий продукт быстрее конкурентов</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-shield-alt"></i>
+            <h3>Гарантия 6 месяцев</h3>
+            <p>Бесплатно исправляем любой баг в течение года</p>
+          </div>
+          <div class="feature-card">
+            <i class="fas fa-users-cog"></i>
+            <h3>Senior & Lead только</h3>
+            <p>4 эксперта: React, Python, Go, Java</p>
+          </div>
+        </div>
+      </section>
 
-            <div class="cta-row">
-                <button class="btn">Оставить заявку</button>
-                <button class="btn secondary">Связаться с рекрутером</button>
-            </div>
+      <section class="stats fade-up">
+        <div class="stats-grid">
+          <div>
+            <div class="stat-number">10</div>
+            <p>Завершённых проектов</p>
+          </div>
+          <div>
+            <div class="stat-number">2</div>
+            <p>Года на рынке</p>
+          </div>
+          <div>
+            <div class="stat-number">2</div>
+            <p>Постоянных клиентов</p>
+          </div>
+          <div>
+            <div class="stat-number">100%</div>
+            <p>Довольных клиентов</p>
+          </div>
+        </div>
+      </section>
 
-            <div class="features">
-                <div class="feature">
-                    <h4>Полный цикл</h4>
-                    <p>Мы предпочитаем брать проекты целиком: от идеи до релиза и поддержки — команда закрывает все этапы.</p>
-                </div>
-                <div class="feature">
-                    <h4>Сильная команда</h4>
-                    <p>Фронтенд, бэкенд (Java, Go, Python), ML, дизайнеры — у нас есть всё, чтобы реализовать сложные задачи.</p>
-                </div>
-                <div class="feature">
-                    <h4>Развитие специалистов</h4>
-                    <p>Мы набираем, обучаем и интегрируем разработчиков — оффлайн и онлайн‑программы, менторство и рост внутри команды.</p>
-                </div>
-                <div class="feature">
-                    <h4>Гибкость</h4>
-                    <p>Аутсорс/аутстаф возможны, но мы сильнее в полном сопровождении проекта командой.</p>
-                </div>
-            </div>
+      <section id="services" style="padding: 160px 0">
+        <div style="text-align: center; margin-bottom: 6rem" class="fade-up">
+          <h2
+            style="
+              font-size: 4rem;
+              font-weight: 900;
+              background: var(--gradient);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            "
+          >
+            Что мы делаем лучше всех
+          </h2>
+        </div>
 
-            <div class="sections" style="margin-top:22px">
-                <div class="section card" id="about">
-                    <h3>Коротко о нас</h3>
-                    <p class="small">Мы молодая, энергичная команда: много внутренних проектов, стабильные партнёры и постоянный поток задач. Работаем на перспективу — помогаем стартапам, участвуем в грантах, развиваем продукты.</p>
-                    <div style="margin-top:12px">
-                        <span class="pill">Kanban</span>
-                        <span class="pill">Отчетность</span>
-                        <span class="pill">Менторство</span>
-                    </div>
-                </div>
+        <div class="service-item fade-up">
+          <div>
+            <h3 style="font-size: 2.8rem; margin-bottom: 1.5rem">
+              Разработка на заказ
+            </h3>
+            <p
+              style="
+                font-size: 1.3rem;
+                color: var(--text-muted);
+                margin-bottom: 2.5rem;
+              "
+            >
+              SaaS-продукты • Стартапы • Корпоративные системы •
+              Высоконагруженные сервисы
+            </p>
+            <ul
+              style="
+                font-size: 1.2rem;
+                line-height: 2.2;
+                color: var(--text-muted);
+              "
+            >
+              <li>React / Vue</li>
+              <li>Python / Go / Java</li>
+              <li>Microservices</li>
+            </ul>
+          </div>
+          <div
+            class="service-img"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2426&auto=format&fit=crop');
+            "
+          ></div>
+        </div>
 
-                <div class="card section" id="services">
-                    <h3>Услуги</h3>
-                    <ul class="list">
-                        <li>Разработка под ключ (веб, мобильные, backend, ML).</li>
-                        <li>Полная команда: дизайн, frontend, backend, QA, DevOps.</li>
-                        <li>Аутсорс/аутстаф (по запросу) и консультации по архитектуре.</li>
-                        <li>Обучение и стажировки для студентов и джуниоров.</li>
-                    </ul>
-                </div>
-            </div>
+        <div class="service-item fade-up">
+          <div>
+            <h3 style="font-size: 2.8rem; margin-bottom: 1.5rem">
+              Аутсорсинг команд
+            </h3>
+            <p
+              style="
+                font-size: 1.3rem;
+                color: var(--text-muted);
+                margin-bottom: 2rem;
+              "
+            >
+              Готовые выделенные команды от 3 до 20+ специалистов под ваш проект
+            </p>
+            <p style="font-size: 1.2rem; line-height: 1.8">
+              Ежедневные отчёты • Полная прозрачность • Интеграция в ваши
+              процессы
+            </p>
+          </div>
+          <div
+            class="service-img"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2370&auto=format&fit=crop');
+            "
+          ></div>
+        </div>
 
-            <div style="margin-top:16px" class="card">
-                <h3>Процесс</h3>
-                <div style="display:flex;flex-direction:column;gap:12px;margin-top:8px">
-                    <div class="process-step"><div class="step-num">1</div><div><strong>Оценка</strong><div class="small">Анализ задачи, сроки, риски.</div></div></div>
-                    <div class="process-step"><div class="step-num">2</div><div><strong>Команда</strong><div class="small">Подбираем девелоперов и дизайнера, назначаем ментора.</div></div></div>
-                    <div class="process-step"><div class="step-num">3</div><div><strong>Реализация</strong><div class="small">Разработка, тестирование, согласования и релиз.</div></div></div>
-                </div>
-            </div>
+        <div class="service-item fade-up">
+          <div>
+            <h3 style="font-size: 2.8rem; margin-bottom: 1.5rem">
+              IT-консалтинг и аудит
+            </h3>
+            <p style="font-size: 1.3rem; color: var(--text-muted)">
+              Аудит архитектуры • DevOps-трансформация • Миграция в облако •
+              Оптимизация скорости и затрат
+            </p>
+          </div>
+          <div
+            class="service-img"
+            style="
+              background-image: url('https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2340&auto=format&fit=crop');
+            "
+          ></div>
+        </div>
+      </section>
 
-        </section>
-
-        <aside class="card photo-card">
-            <div style="width:100%">
-                <div class="photo-placeholder" id="photoPlaceholder">
-                    <!-- Здесь место для вашей фотографии / логотипа. Замените на <img src="..."> -->
-                    <img src="img_3.png">
-                    <div style="text-align:center;color:var(--muted)">
-<!--                        <div style="font-size:18px;font-weight:700">Ваше фото / логотип</div>-->
-<!--                        <div class="small">PNG / JPG • 1200×800 рекомендуется</div>-->
-                    </div>
-                </div>
-            </div>
-
-            <div style="width:100%;margin-top:8px;text-align:center">
-                <div style="display:flex;justify-content:space-between;gap:8px">
-                    <div style="flex:1">
-                        <div style="font-weight:700">Команда</div>
-                        <div class="small">Фронтенд, бэкенд, ML, дизайн</div>
-                    </div>
-                    <div style="flex:1">
-                        <div style="font-weight:700">Партнёры</div>
-                        <div class="small">Стабильные заказы от компаний-партнёров</div>
-                    </div>
-                </div>
-
-                <div style="margin-top:12px" class="partner-row">
-                    <div class="partner">Компания A</div>
-                    <div class="partner">Стартап B</div>
-                    <div class="partner">Проект C</div>
-                    <div class="partner">Grant</div>
-                </div>
-            </div>
-
-            <div style="width:100%;margin-top:16px">
-                <h3 id="team">Мы нанимаем</h3>
-                <p class="small">Ищем фронтендеров, бэкендеров, дизайнеров и маркетолога. Предлагаем обучение, менторство и перспективу работы над внутренними и внешними проектами.</p>
-
-                <div style="display:flex;gap:8px;margin-top:10px">
-                    <button class="btn">Подать резюме</button>
-                    <button class="btn secondary">Узнать о стажировке</button>
-                </div>
-            </div>
-
-            <div style="width:100%;margin-top:16px" id="contacts">
-                <h3>Контакты</h3>
-                <form class="contact-form" onsubmit="event.preventDefault(); alert('Спасибо! Мы свяжемся.');">
-                    <input type="text" placeholder="Имя" required />
-                    <input type="email" placeholder="Email" required />
-                    <textarea placeholder="Кратко опишите задачу" rows="4"></textarea>
-                    <div style="display:flex;gap:8px;">
-                        <button class="btn" type="submit">Отправить</button>
-                        <button class="btn secondary" type="button" onclick="window.location.href='gws.vada@gws.com'">Написать на почту</button>
-                    </div>
-                </form>
-            </div>
-        </aside>
+      <section id="contact" class="contact fade-up">
+        <div style="max-width: 1000px; margin: 0 auto; padding: 0 5%">
+          <h2
+            style="font-size: 4.5rem; font-weight: 900; margin-bottom: 1.5rem"
+          >
+            Готовы запустить проект мечты?
+          </h2>
+          <p style="font-size: 1.6rem; opacity: 0.95">
+            Ответим за 2 часа · Расчёт стоимости бесплатно
+          </p>
+          <form
+            style="margin-top: 5rem"
+            action="https://formsubmit.co/asdfqw321244@gmail.com"
+            method="POST"
+            target="_blank"
+          >
+            <input
+              type="hidden"
+              name="_subject"
+              value="Новая заявка с GorskWorkSpace"
+            />
+            <input type="hidden" name="_template" value="table" />
+            <input type="hidden" name="_captcha" value="false" />
+            <input type="text" name="_honey" style="display: none" />
+            <input
+              type="text"
+              name="name"
+              placeholder="Ваше имя"
+              required
+              autocomplete="name"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              required
+              autocomplete="email"
+            />
+            <input
+              type="tel"
+              name="phone"
+              placeholder="Телефон"
+              autocomplete="tel"
+              inputmode="tel"
+            />
+            <textarea
+              name="message"
+              rows="7"
+              placeholder="Расскажите о проекте — чем подробнее, тем точнее расчёт"
+              required
+            ></textarea>
+            <button
+              type="submit"
+              class="cta-btn"
+              style="width: 100%; padding: 1.6rem; font-size: 1.4rem"
+            >
+              Получить расчёт стоимости
+            </button>
+          </form>
+          <p style="margin-top: 5rem; font-size: 1.3rem">
+            Или пишите прямо сейчас: <br />
+            <a
+              href="mailto:asdfqw321244@gmail.com"
+              style="color: white; text-decoration: underline"
+              >asdfqw321244@gmail.com</a
+            >
+            •
+            <a
+              href="https://t.me/GorskWorkSpace"
+              style="color: white; text-decoration: underline"
+              >@gorskworkspace</a
+            >
+          </p>
+        </div>
+      </section>
     </main>
 
-    <!-- TEAM SECTION START -->
-    <section class="team-section" style="margin-top:40px">
-        <h2 style="margin-bottom:18px">Основатели</h2>
-
-        <div class="founders-row" style="
-        display:flex;
-        gap:20px;
-        justify-content:space-between;
-        align-items:flex-start;
-        flex-wrap:wrap;
-    ">
-
-            <!-- Founder 1 -->
-            <div class="founder card" style="
-            flex:1;
-            min-width:260px;
-            display:flex;
-            align-items:center;
-            gap:14px;
-            padding:18px;
-        ">
-                <!-- Фото (в 2 раза меньше) -->
-                <div style="width:90px;height:90px;flex-shrink:0;">
-                    <img src="img.png"
-                         alt="Founder 1"
-                         style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
-                </div>
-
-                <!-- Текстовый блок -->
-                <div style="display:flex;flex-direction:column;gap:4px">
-                    <p style="margin:0;font-size:16px;font-weight:600">Ким Данил</p>
-
-                    <!-- Телеграм -->
-                    <!-- Так пишется корректная ссылка @username -->
-                    <a href="https://t.me/KkkkimDa" target="_blank"
-                       style="color:var(--accent);text-decoration:none;font-size:14px;">
-                        @KkkkimDa
-                    </a>
-
-                    <!-- Телефон -->
-                    <p style="margin:0;color:var(--muted);font-size:14px">+7 922 799 7002</p>
-
-                    <!-- QR -->
-                    <!-- <img src="PATH_TO_QR_1" class="qr" /> -->
-                </div>
-            </div>
-
-            <!-- Founder 2 -->
-            <div class="founder card" style="
-            flex:1;
-            min-width:260px;
-            display:flex;
-            align-items:center;
-            gap:14px;
-            padding:18px;
-        ">
-                <div style="width:90px;height:90px;flex-shrink:0;">
-                    <img src="img_1.png"
-                         alt="Founder 2"
-                         style="width:100%;height:100%;object-fit:cover;border-radius:12px;">
-                </div>
-
-                <div style="display:flex;flex-direction:column;gap:4px">
-                    <p style="margin:0;font-size:16px;font-weight:600">Гришин Иван</p>
-
-                    <a href="https://t.me/dayr1man" target="_blank"
-                       style="color:var(--accent);text-decoration:none;font-size:14px;">
-                        @dayr1man
-                    </a>
-
-                    <p style="margin:0;color:var(--muted);font-size:14px">+7 962 005 9313</p>
-
-                    <!-- QR -->
-                    <!-- <img src="PATH_TO_QR_2" class="qr" /> -->
-                </div>
-            </div>
-
-        </div>
-    </section>
-    <!-- TEAM SECTION END -->
-
-
     <footer>
-        <div>© <span id="year"></span> GorskWorkSpace — команда разработки. Все права защищены.</div>
-        <div class="small">Система: Kanban • CRM (в разработке) • Менторы</div>
+      <p>© 2025 GorskWorkSpace. Все права защищены.</p>
     </footer>
-</div>
 
-<script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    <!-- Particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <!-- Печатающийся текст -->
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
 
-    // Простая функция для замены плейсхолдера фото — можно использовать drag&drop или загрузку
-    (function(){
-        const ph = document.getElementById('photoPlaceholder');
-        ph.addEventListener('click', ()=>{
-            const url = prompt('Вставьте URL изображения (или нажмите Отмена)');
-            if(url) ph.innerHTML = '<img src="'+url+'" alt="Фото">';
+    <script>
+      // Particles
+      particlesJS("particles", {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: ["#a78bfa", "#c084fc", "#e879f9"] },
+          shape: { type: "circle" },
+          opacity: { value: 0.4, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#a78bfa",
+            opacity: 0.2,
+            width: 1,
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: false,
+            straight: false,
+          },
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true,
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 0.6 } },
+            push: { particles_nb: 4 },
+          },
+        },
+        retina_detect: true,
+      });
+
+      // Печатающийся текст
+      var typed = new Typed("#typed", {
+        strings: [
+          "SaaS-платформы^1000",
+          "Высоконагруженные сервисы^1000",
+          "Стартапы под ключ^1500",
+        ],
+        typeSpeed: 60,
+        backSpeed: 40,
+        backDelay: 1500,
+        loop: true,
+        showCursor: false,
+      });
+
+      // Анимация при скролле
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("visible");
+            }
+          });
+        },
+        { threshold: 0.15 }
+      );
+
+      document.querySelectorAll(".fade-up").forEach((el) => {
+        observer.observe(el);
+      });
+
+      // Хедер при скролле
+      window.addEventListener("scroll", () => {
+        document
+          .querySelector("header")
+          .classList.toggle("scrolled", window.scrollY > 80);
+      });
+
+      const toggle = document.querySelector(".menu-toggle");
+      const navEl = document.querySelector("nav");
+      if (toggle && navEl) {
+        toggle.addEventListener("click", () => {
+          navEl.classList.toggle("open");
         });
-    })();
-</script>
-</body>
+        document.querySelectorAll(".nav-links a").forEach((a) => {
+          a.addEventListener("click", () => navEl.classList.remove("open"));
+        });
+        document.addEventListener("click", (e) => {
+          if (!navEl.contains(e.target)) {
+            navEl.classList.remove("open");
+          }
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape") navEl.classList.remove("open");
+        });
+      }
+    </script>
+  </body>
 </html>
